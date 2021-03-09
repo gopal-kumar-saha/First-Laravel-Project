@@ -16,8 +16,6 @@ class FrontendController extends Controller
 
         $products = Product::all();
 
-    
-
         return view('index', compact('categories','products'));
     }
 
@@ -27,7 +25,9 @@ class FrontendController extends Controller
         return view('contact');
     }
 
-    function product_info(){
-        echo "ok";
+    function product_info($product_id){
+        $product_info = Product::findOrFail($product_id);
+
+        return view('product.single_product', compact('product_info'));
     }
 }

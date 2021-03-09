@@ -30,7 +30,7 @@
                 <div class="col-lg-8 col-12">
                     <div class="contact-form form-style">
                         <div class="cf-msg"></div>
-                        <form action="http://themepresss.com/tf/html/tohoney/mail.php" method="post" id="cf">
+                        <form action="{{ url('contact/info') }}" method="post">
                             <div class="row">
                                 <div class="col-12 col-sm-6">
                                     <input type="text" placeholder="Name" id="fname" name="fname">
