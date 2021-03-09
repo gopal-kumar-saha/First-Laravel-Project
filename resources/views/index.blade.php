@@ -261,7 +261,7 @@
                                 </div>
                             </div>
                             <div class="product-content">
-                                <h3><a href="{{ url('product/info') }}/{{ $product->id }}">{{ $product->product_name }}</a></h3>
+                                <h3><a href="{{ route('ProductInfo', $product->id) }}">{{ $product->product_name }}</a></h3>
                                 
                                 <p class="pull-left">${{ $product->product_price }}
 

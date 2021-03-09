@@ -34,9 +34,8 @@ Route::get('about', function () {
 Route::get('/', [App\Http\Controllers\FrontendController::class, 'home']);      //make forntend controller
 
 Route::get('contact', [App\Http\Controllers\FrontendController::class, 'contact']);      //make forntend controller
-Route::get('product/info/{product_id}', [App\Http\Controllers\FrontendController::class, 'product_infoo']);      //make forntend controller
 
-//Route::get('product/info/{$product_id}', [App\Http\Controllers\FrontendController::class, 'product_info']);
+Route::get('product/info/{product_id}', [App\Http\Controllers\FrontendController::class, 'product_info'])->name('ProductInfo');      //make forntend controller
 
 
 

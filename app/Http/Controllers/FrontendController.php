@@ -27,7 +27,7 @@ class FrontendController extends Controller
         return view('contact');
     }
 
-    function product_infoo(){
+    function product_info(){
         echo "ok";
     }
 }
