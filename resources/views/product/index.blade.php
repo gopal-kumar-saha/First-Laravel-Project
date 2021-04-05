@@ -41,14 +41,15 @@
                             <tr>
                                 <th scope="col">Id</th>
                                 <th scope="col">Category Name</th>
+                                <th scope="col">User Name</th>
                                 <th scope="col">Product Name</th>
                                 <th scope="col">Product Price</th>
                                 <th scope="col">Product Quantity</th>
                                 <th scope="col">Product Short Description</th>
                                 <th scope="col">Product Long Description</th>
                                 <th scope="col">Product Alert Quantity</th>
-                                <th scope="col">Created at</th>
-                                <th scope="col">Updated at</th>
+                                <th scope="col">Product Photo</th>
+
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -64,9 +65,10 @@
                                     {{-- <td>
                                         <input type="checkbox" class="checked_all" name="check_category_id[]" value="{{ $category->id }}">
                                     </td> --}}
-                                    <td>{{ $loop->index + 1 }}</td>
+                                    <td>{{ $loop->index + 1 }}</td> 
                                     
                                     <td> {{ App\Models\Category::find($product->category_id)->category_name }}</td>
+                                    <td> {{ App\Models\User::find($product->user_id)->name }}</td>
 
                                     <td> {{ $product->product_name }}</td>
                                     <td> {{ $product->product_price }}</td>
@@ -76,9 +78,12 @@
 
                                     <td> {{ $product->product_long_description }}</td>
                                     <td> {{ $product->product_quantity_alert }}</td>
+
+                                    <td> 
+                                        <img src="{{ asset('uploads/product_photos/'.$product->product_photo) }}" alt="product photo" width="100" height="100">
+                                    </td>
                                    
-                                    <td> {{ $product->created_at }}</td>
-                                    <td> {{ $product->updated_at }}</td>
+                                   
 
                                     <td>
                                         <a href="edit/product/{{ $product->id }}" type="button" class="btn btn-info btn-sm">Edit</a>
@@ -208,7 +213,7 @@
                         <h3> Insert Product</h3>
                     </div>
                     <div class="card-body">
-                    <form action="{{ route('ProductPosT') }}" method="POST">
+                    <form action="{{ route('ProductPosT') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Category Name : </label>
@@ -246,6 +251,15 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Product Alert Quantity</label>
                                 <input type="text" class="form-control"  placeholder="Enter Product Alert Quantity" name="product_quantity_alert">
+                            </div>
+                            <div class="form-group">
+                                <label>Product Photo</label>
+                                <input type="file" class="form-control" name="product_photo">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Product Featured Photos</label>
+                                <input type="file" class="form-control" name="product_featured_photos[]" multiple>
                             </div>
                             <div>
                                 

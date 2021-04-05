@@ -26,44 +26,23 @@
                 <div class="col-lg-6">
                     <div class="product-single-img">
                         <div class="product-active owl-carousel">
-                            <div class="item">
-                                <img src="{{ asset('tohoney_assets/images/product/product-details/1.jpg') }}" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('tohoney_assets/images/product/product-details/2.jpg') }}" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('tohoney_assets/images/product/product-details/3.jpg') }}" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('tohoney_assets/images/product/product-details/4.jpg') }}" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('tohoney_assets/images/product/product-details/5.jpg') }}" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('tohoney_assets/images/product/product-details/6.jpg') }}" alt="">
-                            </div>
+                            
+                            {{-- {{ App\Models\Featured_Photo::where('product_id', $product_info->id)->get() }} --}}
+                            @foreach (App\Models\Featured_Photo::where('product_id', $product_info->id)->get() as $featured_photo)
+                                 <div class="item">
+                                    <img src="{{ asset('uploads/featured_photos') }}/{{ $featured_photo->featured_photo_name }}" alt="">
+                                </div>
+                            @endforeach
+                           
+                            
                         </div>
                         <div class="product-thumbnil-active  owl-carousel">
-                            <div class="item">
-                                <img src="{{ asset('tohoney_assets/images/product/product-details/1.jpg') }}" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('tohoney_assets/images/product/product-details/2.jpg') }}" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('tohoney_assets/images/product/product-details/3.jpg') }}" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('tohoney_assets/images/product/product-details/4.jpg') }}" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('tohoney_assets/images/product/product-details/5.jpg') }}" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('tohoney_assets/images/product/product-details/6.jpg') }}" alt="">
-                            </div>
+                           @foreach (App\Models\Featured_Photo::where('product_id', $product_info->id)->get() as $featured_photo)
+                                 <div class="item">
+                                    <img src="{{ asset('uploads/featured_photos') }}/{{ $featured_photo->featured_photo_name }}" alt="">
+                                </div>
+                            @endforeach
+                            
                         </div>
                     </div>
                 </div>
@@ -123,56 +102,21 @@
                         </div>
                         <div class="tab-pane" id="tag">
                             <div class="faq-wrap" id="accordion">
-                                <div class="card">
-                                    <div class="card-header" id="headingOne">
-                                        <h5><button data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">General Inquiries ?</button> </h5>
-                                    </div>
-                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                                        <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+
+                                @foreach ($products as $product)
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne">
+                                            <h5><button data-toggle="collapse" data-target="#collapseOne{{ $product->id }}" aria-expanded="true" aria-controls="collapseOne">{{ $product->product_name }}</button> </h5>
+                                        </div>
+                                        <div id="collapseOne{{ $product->id }}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                            <div class="card-body">
+                                                {{ $product->product_long_description }}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingTwo">
-                                        <h5><button class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">How To Use ?</button></h5>
-                                    </div>
-                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                        <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingThree">
-                                        <h5><button class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Shipping & Delivery ?</button></h5>
-                                    </div>
-                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                        <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingfour">
-                                        <h5><button class="collapsed" data-toggle="collapse" data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour">Additional Information ?</button></h5>
-                                    </div>
-                                    <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordion">
-                                        <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingfive">
-                                        <h5><button class="collapsed" data-toggle="collapse" data-target="#collapsefive" aria-expanded="false" aria-controls="collapsefive">Return Policy ?</button></h5>
-                                    </div>
-                                    <div id="collapsefive" class="collapse" aria-labelledby="headingfive" data-parent="#accordion">
-                                        <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
+                                
+                                
                             </div>
                         </div>
                         <div class="tab-pane" id="review">
@@ -303,16 +247,19 @@
                 </div>
             </div>
             <div class="row">
+                @forelse ($related_products as $related_product)
                 <div class="col-lg-3 col-sm-6 col-12">
                     <div class="featured-product-wrap">
                         <div class="featured-product-img">
                             <img src="{{ asset('tohoney_assets/images/product/1.jpg') }}" alt="">
                         </div>
+
+
                         <div class="featured-product-content">
                             <div class="row">
                                 <div class="col-7">
-                                    <h3><a href="shop.html">Nature Honey</a></h3>
-                                    <p>$219.56</p>
+                                    <h3><a href="shop.html">{{ $related_product->product_name }}</a></h3>
+                                    <p>${{ $related_product->product_price }}</p>
                                 </div>
                                 <div class="col-5 text-right">
                                     <ul>
@@ -324,69 +271,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6 col-12">
-                    <div class="featured-product-wrap">
-                        <div class="featured-product-img">
-                            <img src="{{ asset('tohoney_assets/images/product/2.jpg') }}" alt="">
-                        </div>
-                        <div class="featured-product-content">
-                            <div class="row">
-                                <div class="col-7">
-                                    <h3><a href="shop.html">Olive Oil</a></h3>
-                                    <p>$354.75</p>
-                                </div>
-                                <div class="col-5 text-right">
-                                    <ul>
-                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        <li><a href="cart.html"><i class="fa fa-heart"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+
+                @empty
+                    <div class="badge badge-info">
+                        <h4 class="text-center">There is no related product</h4>
                     </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-12">
-                    <div class="featured-product-wrap">
-                        <div class="featured-product-img">
-                            <img src="{{ asset('tohoney_assets/images/product/3.jpg') }}" alt="">
-                        </div>
-                        <div class="featured-product-content">
-                            <div class="row">
-                                <div class="col-7">
-                                    <h3><a href="shop.html">Sunrise Oil</a></h3>
-                                    <p>$214.80</p>
-                                </div>
-                                <div class="col-5 text-right">
-                                    <ul>
-                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        <li><a href="cart.html"><i class="fa fa-heart"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-12">
-                    <div class="featured-product-wrap">
-                        <div class="featured-product-img">
-                            <img src="tohoney_assets/images/product/4.jpg" alt="">
-                        </div>
-                        <div class="featured-product-content">
-                            <div class="row">
-                                <div class="col-7">
-                                    <h3><a href="shop.html">Coconut Oil</a></h3>
-                                    <p>$241.00</p>
-                                </div>
-                                <div class="col-5 text-right">
-                                    <ul>
-                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                        <li><a href="cart.html"><i class="fa fa-heart"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
+                @endforelse
+                
+              
             </div>
         </div>
     </div>

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Category;  // pore bosa hoyse kintu
 
+use App\Models\Product;
+
 use Carbon\Carbon;
 
 class CategoryController extends Controller
@@ -58,13 +60,11 @@ class CategoryController extends Controller
     function category_delete($category_id){
 
         if(Category::where('id', $category_id)->exists()){
-            $data = Category::find($category_id);
-
-            $data->delete();
+            Category::find($category_id)->delete();
+            Product::where('category_id', $category_id)->delete();
         }
-        
-        
-        return back()->with('category_delete_status', 'Category deleted successfully!');
+        return back()->with('category_delete_status', 'Category deleted successfully!'); 
+
     }
 
 
@@ -169,6 +169,6 @@ class CategoryController extends Controller
         else{
             echo "kichu checked koro nai kno";
         }
-
     }
+
 }

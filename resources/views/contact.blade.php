@@ -28,9 +28,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-12">
+                    @if (session('contact_send_status'))
+                        <div class="alert alert-success text-center">
+                            {{ session('contact_send_status') }}
+                        </div>
+                    @endif
+                    
                     <div class="contact-form form-style">
                         <div class="cf-msg"></div>
-                        <form action="{{ url('contact/info') }}" method="post">
+                        {{-- <form action="{{ route('ContactInfo') }}" method="POST"> --}}
+                        <form action="{{ route('ContactMail') }}" method="POST">
+                            @csrf
                             <div class="row">
                                 <div class="col-12 col-sm-6">
                                     <input type="text" placeholder="Name" id="fname" name="fname">
@@ -45,7 +53,7 @@
                                     <textarea class="contact-textarea" placeholder="Message" id="msg" name="msg"></textarea>
                                 </div>
                                 <div class="col-12">
-                                    <button id="submit" name="submit">SEND MESSAGE</button>
+                                    <button type="submit">SEND MESSAGE</button>
                                 </div>
                             </div>
                         </form>

@@ -70,10 +70,24 @@
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
 
+        <a href="{{ route('SubCategory') }}" class="sl-menu-link @yield('subcategory')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
+            <span class="menu-item-label">Sub category </span>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+
         <a href="{{ url('product') }}" class="sl-menu-link @yield('product')">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
             <span class="menu-item-label">Product</span>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+
+        <a href="{{ url('setting') }}" class="sl-menu-link @yield('setting')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
+            <span class="menu-item-label">Setting</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
    
@@ -146,7 +160,7 @@
 
 
 
-            @yield('content')
+    @yield('content')
 
 
 

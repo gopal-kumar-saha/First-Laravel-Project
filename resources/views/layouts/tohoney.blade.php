@@ -60,8 +60,17 @@
                 <div class="row">
                     <div class="col-md-6 col-12">
                         <ul class="d-flex header-contact">
-                            <li><i class="fa fa-phone"></i> +01 123 456 789</li>
-                            <li><i class="fa fa-envelope"></i> youremail@gmail.com</li>
+                            @if (App\Models\Setting::where('setting_name', 'phone')->first()->setting_value)
+                                <li> <i class="fa fa-phone"></i> 
+                                    {{ App\Models\Setting::where('setting_name', 'phone')->first()->setting_value }}
+                                </li>
+                            @endif
+
+                             @if (App\Models\Setting::where('setting_name', 'email')->first()->setting_value)
+                                <li><i class="fa fa-envelope"> </i> 
+                                    {{ App\Models\Setting::where('setting_name', 'email')->first()->setting_value }}
+                                </li>
+                             @endif
                         </ul>
                     </div>
                     <div class="col-md-6 col-12">
@@ -69,7 +78,7 @@
                             <li>
                                 <a href="javascript:void(0);"><i class="fa fa-user"></i> My Account <i class="fa fa-angle-down"></i></a>
                                 <ul class="dropdown_style">
-                                    <li><a href="login.html">Login</a></li>
+                                    <li><a href="{{ route('TohoneyLogin') }}">Login</a></li>
                                     <li><a href="register.html">Register</a></li>
                                     <li><a href="cart.html">Cart</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>
@@ -98,7 +107,7 @@
                                 <li class="active"><a href="{{ url('/') }}">Home</a></li>
                                 <li><a href="about.html">About</a></li>
                                 <li>
-                                    <a href="javascript:void(0);">Shop </a>
+                                    <a href="{{ route('shop') }}">Shop </a>
 
                                 </li>
                                 

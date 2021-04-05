@@ -6,7 +6,15 @@ use App\Http\Controllers\FrontendController;
 
 use App\Http\Controllers\CategoryController;
 
+use App\Http\Controllers\SubcategoryController;
+
 use App\Http\Controllers\ProductController;
+
+use App\Http\Controllers\ContactController;
+
+use App\Http\Controllers\SettingController;
+
+use App\Http\Controllers\VerifyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,23 +39,39 @@ Route::get('about', function () {
 //     echo "Hello world";
 // });
 
-Route::get('/', [App\Http\Controllers\FrontendController::class, 'home']);      //make forntend controller
 
-Route::get('contact', [App\Http\Controllers\FrontendController::class, 'contact']);      //make forntend controller
+ 
 
-Route::get('product/info/{product_id}', [App\Http\Controllers\FrontendController::class, 'product_info'])->name('ProductInfo');
+//                  FrontendController controller           //////////////////////////
 
-Route::post('contact/info', [App\Http\Controllers\FrontendController::class, 'contact_info']);      //make forntend controller
+Route::get('/', [FrontendController::class, 'home']); 
 
+Route::get('product/info/{product_id}', [FrontendController::class, 'product_info'])->name('ProductInfo');
 
+Route::get('shop', [FrontendController::class, 'shop'])->name('shop');
 
-
-
-
-
+Route::get('categoriwise/{category_id}', [FrontendController::class, 'categoriwise'])->name('categoriwise');
 
 
+//                  SettingController controller           //////////////////////////
 
+Route::get('setting', [SettingController::class, 'setting'])->name('setting');
+Route::post('setting/post', [SettingController::class, 'setting_post'])->name('SettingPost'); 
+
+Route::get('tohoney_login', [SettingController::class, 'login'])->name('TohoneyLogin');
+
+
+//                  Contact controller           //////////////////////////
+
+Route::get('contact', [App\Http\Controllers\ContactController::class, 'contact']);
+Route::post('contact/info', [App\Http\Controllers\ContactController::class, 'contact_info'])->name('ContactInfo');
+Route::post('contact/mail', [App\Http\Controllers\ContactController::class, 'contact_mail'])->name('ContactMail');
+
+
+
+
+
+//                  Category controller           //////////////////////////
 
 Route::get('category', [CategoryController::class, 'category']);      //use controller
 
@@ -70,15 +94,66 @@ Route::get('category/force_delete/{category_id}', [CategoryController::class, 'c
 
 Route::post('category/check/delete', [CategoryController::class, 'category_check_delete'])->name('check_delete');      //use controller
 
+     //use controller
+
+
+
+//                  Sub-Category controller           //////////////////////////
+
+Route::get('subcategory', [SubcategoryController::class, 'sub_category'])->name('SubCategory'); 
+
+
+
+
+Route::get('verify', [VerifyController::class, 'getVerify'])->name('getverify'); 
+Route::post('verify', [VerifyController::class, 'postVerify'])->name('verify'); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Route::get('service', function () {
     $name = "Dipu Saha";
     return view('service', compact('name'));
 });
 
+
+
+
+
+
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+
+
+
+
+
 
 
 
@@ -92,11 +167,10 @@ Route::get('edit/product/{product_id}', [ProductController::class, 'edit_product
 
 Route::get('delete/product/{product_id}', [ProductController::class, 'delete_product']); 
 
-Route::post('product/edit/post', [ProductController::class, 'product_edit_post'])->name('ProductEditPosT');
+Route::post('product/edit/post/{product_id}', [ProductController::class, 'product_edit_post'])->name('ProductEditPosT');
 
 Route::get('restore/product/{product_id}', [ProductController::class, 'restore_product'])->name('restoreProduct');
 
 Route::get('force_delete/product/{product_id}', [ProductController::class, 'force_delete_product'])->name('forceDelete');
-
 
 

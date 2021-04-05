@@ -38,7 +38,7 @@
                     @endif
                     
                     <div class="card-body">
-                    <form action="{{ route('ProductEditPosT') }}" method="POST">
+                    <form action="{{ route('ProductEditPosT', $products->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
 
@@ -75,27 +75,36 @@
                                 <label for="exampleInputEmail1">Product Price</label>
                                 <input type="text" class="form-control"  value="{{ $products->product_price }}" name="product_price">
                             </div>
+
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Product Quantity</label>
                                 <input type="text" class="form-control"  value="{{ $products->product_quantity }}" name="product_quantity">
                             </div>
+
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Product Short Description</label>
                                 <textarea cols="40" rows="3" name="product_short_description">{{ $products->product_short_description }}</textarea>
                             </div>
+
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Product Long Description</label>
                                 <textarea cols="40" rows="5" name="product_long_description">{{ $products->product_long_description }}</textarea>                            
                             </div>
+
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Product Alert Quantity</label>
                                 <input type="text" class="form-control"  value="{{ $products->product_quantity_alert }}" name="product_quantity_alert">
                             </div>
-                            <div>
-                                
-                                
+
+                            <div class="form-group">                               
+                                <img src="{{ asset('uploads/product_photos/'.$products->product_photo) }}" alt="Not found" height="150" width="200">
                             </div>
                             
+                             <div class="form-group">
+                                <label for="exampleInputEmail1">New Image</label>
+                                <input type="file" class="form-control"  value="{{ $products->product_photo }}" name="product_new_photo">
+                            </div>
+
                             <button type="submit" class="btn btn-primary">Submit</button>
 
                             <br>

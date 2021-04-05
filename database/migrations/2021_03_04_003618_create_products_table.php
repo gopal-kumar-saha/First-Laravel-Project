@@ -1,5 +1,7 @@
 <?php
 
+// product migration file
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->id();
 
             $table->integer('category_id');
+            $table->integer('user_id');
 
             $table->string('product_name', 50);
             $table->float('product_price', 8 , 2);
@@ -24,6 +27,8 @@ class CreateProductsTable extends Migration
             $table->text('product_short_description');
             $table->longText('product_long_description');
             $table->integer('product_quantity_alert');
+
+            $table->string('product_photo', 100);
             
             $table->timestamps();
             
