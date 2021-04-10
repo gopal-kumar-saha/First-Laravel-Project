@@ -154,41 +154,24 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript:void(0);"><i class="flaticon-shop"></i> <span>3</span></a>
+                                <a href="javascript:void(0);"><i class="flaticon-shop"></i> <span>{{ App\Models\Cart::where('ip_address',request()->ip())->get()->count() }}</span></a>
                                 <ul class="cart-wrap dropdown_style">
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="{{ asset('tohoney_assets') }}/images/cart/1.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="{{ asset('tohoney_assets') }}/images/cart/3.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="{{ asset('tohoney_assets') }}/images/cart/2.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
+                                        {{-- {{ App\Models\Cart::all() }} --}}
+                                        @foreach (App\Models\Cart::where('ip_address',request()->ip())->get() as $cart)
+                                            <li class="cart-items">
+                                                <div class="cart-img">
+                                                    <img src="{{ asset('uploads/product_photos') }}/{{ App\Models\Product::find($cart->product_id)->product_photo }}" alt="Not Found" width="75" height="75">
+                                                </div>
+                                                <div class="cart-content">
+                                                    <a href="cart.html">{{ App\Models\Product::find($cart->product_id)->product_name }}</a>
+                                                    <span>QTY : {{ $cart->product_quantity }}</span>
+                                                    <p>${{ App\Models\Product::find($cart->product_id)->product_price  }}</p>
+                                                    <i class="fa fa-times"></i>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    
+                                  
                                     <li>Subtotol: <span class="pull-right">$70.00</span></li>
                                     <li>
                                         <button>Check Out</button>

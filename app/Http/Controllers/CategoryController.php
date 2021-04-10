@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Category;  // pore bosa hoyse kintu
 
+use App\Models\Subcategory;  // pore bosa hoyse kintu
+
 use App\Models\Product;
 
 use Carbon\Carbon;
@@ -35,19 +37,25 @@ class CategoryController extends Controller
         
         // print_r($request->all());
         $request->validate([
-            'category_name'=>'required|max:10|min:5|unique:categories,category_name'
+            'category_name'=>'required|max:15|min:2|unique:categories,category_name'
         ],[
             'category_name.required'=>'Faka dewa jabe na !!!',
-            'category_name.max'=>'10 tar beshi deso kno??? !!!',
-            'category_name.min'=>'5 tar kom deso kno ???? !!!'
+            'category_name.max'=>'15 tar beshi deso kno??? !!!',
+            'category_name.min'=>'2 tar kom deso kno ???? !!!'
         ]);
 
         $category_name = $request->category_name;
 
         // echo $category_name;
 
-        Category::insert([
+        $category_id=Category::insertGetId([
             'category_name' => $category_name,
+            'created_at' => Carbon::now()
+        ]);
+
+        Subcategory::insert([
+            'category_id' => $category_id,
+            'subcategory_name' => $request->subcategory_name,
             'created_at' => Carbon::now()
         ]);
 

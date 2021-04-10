@@ -13,6 +13,17 @@ use Carbon\Carbon;
 class SubcategoryController extends Controller
 {
     function sub_category(){
-        return view('subcategory.index');
+        $categories = Category::all();
+        return view('subcategory.index', compact('categories')); 
+    }
+
+    function subcategory_post (Request $request){
+        // print_r($request->all());
+        Subcategory::insert([
+            'category_id' => $request->category_id,
+            'subcategory_name' => $request->subcategory_name,
+            'created_at' => Carbon::now()
+        ]);
+        return back();
     }
 }

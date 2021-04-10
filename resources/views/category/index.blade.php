@@ -200,8 +200,12 @@
                                     <form action="{{ 'category/post' }}" method="POST">
                                             @csrf
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Category</label>
-                                                <input type="text" class="form-control"  placeholder="Enter category name" name="category_name">
+                                                <label for="exampleInputEmail1">Category Name</label>
+                                                <input type="text" class="form-control"  placeholder="Enter category name" name="category_name" value="{{ old('category_name') }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Subcategory Name</label>
+                                                <input type="text" class="form-control"  placeholder="Enter subcategory name" name="subcategory_name" value="{{ old('subcategory_name') }}">
                                             </div>
                                             <div>
                                                 @error('category_name')

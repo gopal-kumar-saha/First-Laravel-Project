@@ -112,14 +112,6 @@
 
 
 
-
-
-
-
-
-
-
-
      <div class="row mt-3">
         <div class="col-12">
             <div class="card text-white">
@@ -229,6 +221,19 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="exampleInputEmail1">Subcategory Name : </label>
+                                <select class="form-control" name="subcategory_id">
+    
+                                    <option value="">-Chosse One-</option>
+                                    @foreach ($subcategories as $subcategory)
+                                        <option value="{{  $subcategory->id }}">{{ App\Models\Category::find($subcategory->category_id)->category_name }} >{{ $subcategory->subcategory_name }}</option>
+                                    @endforeach
+                                    
+                                   
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Product Name</label>
                                 <input type="text" class="form-control"  placeholder="Enter Product name" name="product_name">
                             </div>
@@ -277,12 +282,6 @@
                     </div>
             </div>
         </div>
-
-
-
-
-
-
 </div>
 
 

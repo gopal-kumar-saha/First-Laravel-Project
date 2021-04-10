@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->id();
 
             $table->integer('category_id');
+            $table->integer('subcategory_id');
             $table->integer('user_id');
 
             $table->string('product_name', 50);

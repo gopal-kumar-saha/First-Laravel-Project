@@ -8,6 +8,8 @@ use Illuminate\Support\Str;
 
 use App\Models\Category;  // pore bosa hoyse kintu
 
+use App\Models\Subcategory;  // pore bosa hoyse kintu
+
 use App\Models\Product;  // pore bosa hoyse kintu
 
 use App\Models\Featured_Photo;
@@ -22,11 +24,13 @@ class ProductController extends Controller
 {
     function product(){
         $categories = Category::all();
-        $products = Product::where('user_id', Auth::id())->get();
+        $products = Product::where('user_id', Auth::id())->get(); 
+
+        $subcategories = Subcategory::all();
 
         $soft_deleted_products =  Product::onlyTrashed('deleted_at')->get();
 
-        return view('product.index', compact('categories','products','soft_deleted_products'));
+        return view('product.index', compact('categories','products','soft_deleted_products','subcategories'));
     }
 
 
@@ -46,7 +50,7 @@ class ProductController extends Controller
         $product_id = Product::insertGetId($request->except('_token','product_photo','product_featured_photos') + [
             'product_photo' => $random_product_photo_name,
             'user_id' => Auth::id(),
-            'created_at' => Carbon::now()
+            'created_at' => Carbon::now() 
         ]);
 
 

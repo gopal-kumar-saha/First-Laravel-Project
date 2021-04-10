@@ -14,6 +14,8 @@ use App\Http\Controllers\ContactController;
 
 use App\Http\Controllers\SettingController;
 
+use App\Http\Controllers\CartController;
+
 use App\Http\Controllers\VerifyController;
 
 /*
@@ -100,7 +102,8 @@ Route::post('category/check/delete', [CategoryController::class, 'category_check
 
 //                  Sub-Category controller           //////////////////////////
 
-Route::get('subcategory', [SubcategoryController::class, 'sub_category'])->name('SubCategory'); 
+Route::get('subcategory', [SubcategoryController::class, 'sub_category'])->name('SubCategory');  
+Route::post('subcategory/post', [SubcategoryController::class, 'subcategory_post'])->name('SubcategoryPosT'); 
 
 
 
@@ -112,7 +115,9 @@ Route::post('verify', [VerifyController::class, 'postVerify'])->name('verify');
 
 
 
+//                  Cart controller           //////////////////////////
 
+Route::post('add/to/cart/{product_id}', [CartController::class, 'add_to_cart'])->name('AddToCart');
 
 
 
@@ -153,7 +158,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
-
+  
 
 
 
