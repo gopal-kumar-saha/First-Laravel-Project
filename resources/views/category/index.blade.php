@@ -176,23 +176,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         <div class="col-4">
                             <div class="card text-white bg-secondary">
                                     <div class="card-header"> Insert Category</div>

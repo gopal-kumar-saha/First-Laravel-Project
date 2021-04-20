@@ -156,7 +156,9 @@
                             <li>
                                 <a href="javascript:void(0);"><i class="flaticon-shop"></i> <span>{{ App\Models\Cart::where('ip_address',request()->ip())->get()->count() }}</span></a>
                                 <ul class="cart-wrap dropdown_style">
-                                        {{-- {{ App\Models\Cart::all() }} --}}
+                                        @php
+                                            $sub_total = 0;
+                                        @endphp
                                         @foreach (App\Models\Cart::where('ip_address',request()->ip())->get() as $cart)
                                             <li class="cart-items">
                                                 <div class="cart-img">
@@ -165,16 +167,21 @@
                                                 <div class="cart-content">
                                                     <a href="cart.html">{{ App\Models\Product::find($cart->product_id)->product_name }}</a>
                                                     <span>QTY : {{ $cart->product_quantity }}</span>
-                                                    <p>${{ App\Models\Product::find($cart->product_id)->product_price  }}</p>
-                                                    <i class="fa fa-times"></i>
+                                                    <p>${{ App\Models\Product::find($cart->product_id)->product_price *  $cart->product_quantity }}</p>
+                                                    
+                                                    <a href="{{ route('CartDelete',$cart->id)}}"> <i class="fa fa-times"></i> </a>
                                                 </div>
+                                                @php
+                                                    $sub_total += App\Models\Product::find($cart->product_id)->product_price *  $cart->product_quantity;
+                                                @endphp
                                             </li>
                                         @endforeach
                                     
                                   
-                                    <li>Subtotol: <span class="pull-right">$70.00</span></li>
+                                    <li>Subtotol: <span class="pull-right">${{ $sub_total }}</span></li>
                                     <li>
-                                        <button>Check Out</button>
+                                        {{-- <button>Check Out</button> --}}
+                                        <a href="{{ route('CartDetails') }}" class="btn btn-info">Check Out</a>
                                     </li>
                                 </ul>
                             </li>
@@ -410,6 +417,8 @@
     <script src="{{ asset('tohoney_assets/js/jquery-ui.min.js') }}"></script>
     <!-- main js -->
     <script src="{{ asset('tohoney_assets/js/scripts.js') }}"></script>
+
+    @yield('footer_scripts')
 </body>
 
 

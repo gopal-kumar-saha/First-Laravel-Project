@@ -18,6 +18,8 @@ use App\Http\Controllers\CartController;
 
 use App\Http\Controllers\VerifyController;
 
+use App\Http\Controllers\CouponController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -118,14 +120,21 @@ Route::post('verify', [VerifyController::class, 'postVerify'])->name('verify');
 //                  Cart controller           //////////////////////////
 
 Route::post('add/to/cart/{product_id}', [CartController::class, 'add_to_cart'])->name('AddToCart');
+Route::get('cart/delete/{cart_id}', [CartController::class, 'cart_delete'])->name('CartDelete');
+
+Route::get('cart/details', [CartController::class, 'cart_details'])->name('CartDetails');
+Route::get('cart/details/{cart_name}', [CartController::class, 'cart_details'])->name('CartWithCoupon');
+
+Route::post('cart/update', [CartController::class, 'cart_update'])->name('UpdateCart');
+Route::get('checkout', [CartController::class, 'check_out'])->name('Checkout');
 
 
 
 
 
+//                  Coupon controller           //////////////////////////
 
-
-
+Route::resource('coupon',CouponController::class);
 
 
 

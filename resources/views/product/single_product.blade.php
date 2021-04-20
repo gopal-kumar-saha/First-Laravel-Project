@@ -49,6 +49,7 @@
                 <div class="col-lg-6">
                     <div class="product-single-content">
                         <h3>{{ $product_info->product_name }}</h3>
+                            <h5 class="badge badge-info">Available Product:  {{ $product_info->product_quantity }}</h5>
                         <div class="rating-wrap fix">
                             <span class="pull-left">${{ $product_info->product_price }}</span>
                             <ul class="rating pull-right">
@@ -60,6 +61,12 @@
                                 <li>(05 Customar Review)</li>
                             </ul>
                         </div>
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                        
                         <p>{{ $product_info->product_short_description }}</p>
                             <form action="{{ route('AddToCart', $product_info->id) }}" method="POST">
                                 @csrf
