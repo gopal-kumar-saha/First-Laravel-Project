@@ -18,22 +18,26 @@
         </div>
     </div>
     <!-- .breadcumb-area end -->
+
+@auth
     <!-- checkout-area start -->
     <div class="checkout-area ptb-100">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="checkout-form form-style">
-                        <h3>Billing Details</h3>
+                        <h3>
+                            Billing Details. ( You are logged as:{{ Auth::user()->name }} )
+                        </h3>
                         <form action="http://themepresss.com/tf/html/tohoney/checkout">
                             <div class="row">
                                 <div class="col-12">
                                     <p>Name *</p>
-                                    <input type="text">
+                                    <input type="text" value="{{ Auth::user()->name }}" >
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <p>Email Address *</p>
-                                    <input type="email">
+                                    <input type="email" value="{{ Auth::user()->email }}">
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <p>Phone No. *</p>
@@ -75,12 +79,12 @@
                     <div class="order-area">
                         <h3>Your Order</h3>
                         <ul class="total-cost">
-                            <li>Pure Nature Honey <span class="pull-right">$139.00</span></li>
-                            <li>Your Product Name <span class="pull-right">$100.00</span></li>
-                            <li>Pure Nature Honey <span class="pull-right">$141.00</span></li>
-                            <li>Subtotal <span class="pull-right"><strong>$380.00</strong></span></li>
+                            <li>Coupon Name <span class="pull-right">{{ (session('coupon_name')) ? session('coupon_name'):"Not Applicable" }}</span></li>
+                            <li>Subtotal <span class="pull-right"><strong>${{ session('subtotal') }}</strong></span></li>
+                            <li>Discount <span class="pull-right"><strong>{{ session('discount') }}%</strong></span></li>
+                            <li>Discount Amount <span class="pull-right"><strong>${{ session('discount_amount') }}</strong></span></li>
                             <li>Shipping <span class="pull-right">Free</span></li>
-                            <li>Total<span class="pull-right">$380.00</span></li>
+                            <li>Total<span class="pull-right">${{ session('total') }}</span></li>
                         </ul>
                         <ul class="payment-method">                            
                             <li>
@@ -98,5 +102,24 @@
             </div>
         </div>
     </div>
+    <!-- checkout-area End --> 
+@else
+    <div class="checkout-area ptb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                        <div class="alert alert-danger">
+                            You are not logged in.
+                            <br>
+                            if you have an already account.please <a href="{{ url('customer/login') }}">log in...</a>
+                            <br>
+                            if you have not an account.please <a href="{{ url('customer/register') }}">Register...</a>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endauth
+    
 
 @endsection

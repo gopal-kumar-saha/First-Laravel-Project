@@ -56,6 +56,13 @@ Route::get('shop', [FrontendController::class, 'shop'])->name('shop');
 
 Route::get('categoriwise/{category_id}', [FrontendController::class, 'categoriwise'])->name('categoriwise');
 
+Route::get('customer/register', [FrontendController::class, 'customer_register'])->name('CustomerRegister');
+
+Route::post('customer/register/post', [FrontendController::class, 'customer_register_post'])->name('CustomerRegisterPost');
+
+Route::get('customer/login', [FrontendController::class, 'customer_login'])->name('CustomerLogin');
+
+Route::post('customer/login/post', [FrontendController::class, 'customer_login_post'])->name('CustomerLoginPost');
 
 //                  SettingController controller           //////////////////////////
 
@@ -158,6 +165,8 @@ Route::get('service', function () {
 
 
 Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

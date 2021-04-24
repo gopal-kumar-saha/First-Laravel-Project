@@ -118,6 +118,17 @@
                                         <li><span class="pull-left">Discount(in amount) </span>${{ ($discount_amount/100)* $Subtotal}}</li>
                                         <li><span class="pull-left"> Total </span> ${{ $Subtotal - (($discount_amount/100)* $Subtotal) }}</li>
                                     </ul>
+                                    @php
+                                        session([
+                                            'coupon_name' => $coupon_name,
+                                            'subtotal' => $Subtotal,
+                                            'discount' => $discount_amount,
+                                            'discount_amount' => ($discount_amount/100)* $Subtotal,
+                                            'total' => $Subtotal - (($discount_amount/100)* $Subtotal),
+                                        ]);
+                                    @endphp
+
+
                                     @if ($flag)
                                         <a href="#"> problem ase</a>
                                     @else 
