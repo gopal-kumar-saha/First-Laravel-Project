@@ -28,6 +28,9 @@
     <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
     <meta name="author" content="ThemePixels">
 
+     <!-- ajax meta -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Starlight Responsive Bootstrap 4 Admin Template</title>
 
     <!-- vendor css -->
@@ -63,40 +66,46 @@
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
 
-        <a href="{{ url('category') }}" class="sl-menu-link @yield('category')">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
-            <span class="menu-item-label">Category </span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
 
-        <a href="{{ route('SubCategory') }}" class="sl-menu-link @yield('subcategory')">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
-            <span class="menu-item-label">Sub category </span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
+        @if (Auth::user()->role == 1)
 
-        <a href="{{ url('product') }}" class="sl-menu-link @yield('product')">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
-            <span class="menu-item-label">Product</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
+              <a href="{{ url('category') }}" class="sl-menu-link @yield('category')">
+              <div class="sl-menu-item">
+                <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
+                <span class="menu-item-label">Category </span>
+              </div><!-- menu-item -->
+            </a><!-- sl-menu-link -->
 
-        <a href="{{ url('setting') }}" class="sl-menu-link @yield('setting')">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
-            <span class="menu-item-label">Setting</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
+            <a href="{{ route('SubCategory') }}" class="sl-menu-link @yield('subcategory')">
+              <div class="sl-menu-item">
+                <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
+                <span class="menu-item-label">Sub category </span>
+              </div><!-- menu-item -->
+            </a><!-- sl-menu-link -->
 
-        <a href="{{ url('coupon') }}" class="sl-menu-link @yield('coupon')">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
-            <span class="menu-item-label">Coupon</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
+            <a href="{{ url('product') }}" class="sl-menu-link @yield('product')">
+              <div class="sl-menu-item">
+                <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
+                <span class="menu-item-label">Product</span>
+              </div><!-- menu-item -->
+            </a><!-- sl-menu-link -->
+
+            <a href="{{ url('setting') }}" class="sl-menu-link @yield('setting')">
+              <div class="sl-menu-item">
+                <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
+                <span class="menu-item-label">Setting</span>
+              </div><!-- menu-item -->
+            </a><!-- sl-menu-link -->
+
+            <a href="{{ url('coupon') }}" class="sl-menu-link @yield('coupon')">
+              <div class="sl-menu-item">
+                <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
+                <span class="menu-item-label">Coupon</span>
+              </div><!-- menu-item -->
+            </a><!-- sl-menu-link -->
+            
+        @endif
+        
    
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
@@ -186,6 +195,8 @@
     <script src="{{ asset("starlight_assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js") }}"> </script>
 
     <script src="{{ asset("starlight_assets/js/starlight.js") }}"></script>
+
+    @yield('starlight_footer_scripts')
 
   </body>
 </html>

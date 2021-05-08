@@ -20,6 +20,8 @@ use App\Http\Controllers\VerifyController;
 
 use App\Http\Controllers\CouponController;
 
+use App\Http\Controllers\SslCommerzPaymentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,6 +66,12 @@ Route::get('customer/login', [FrontendController::class, 'customer_login'])->nam
 
 Route::post('customer/login/post', [FrontendController::class, 'customer_login_post'])->name('CustomerLoginPost');
 
+Route::get('customer/logout', [FrontendController::class, 'customer_logout'])->name('CustomerLogout');
+
+Route::post('get/city/list', [FrontendController::class, 'get_city_list']);
+
+Route::post('checkout/post', [FrontendController::class, 'checkout_post']);
+
 //                  SettingController controller           //////////////////////////
 
 Route::get('setting', [SettingController::class, 'setting'])->name('setting');
@@ -105,7 +113,6 @@ Route::get('category/force_delete/{category_id}', [CategoryController::class, 'c
 
 Route::post('category/check/delete', [CategoryController::class, 'category_check_delete'])->name('check_delete');      //use controller
 
-     //use controller
 
 
 
@@ -168,7 +175,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 
@@ -184,6 +191,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('product', [ProductController::class, 'product'])->name('ProducT'); 
 
+Route::post('get/subcategory/list', [ProductController::class, 'get_subcategory_list']); 
+
 Route::post('product/post', [ProductController::class, 'product_post'])->name('ProductPosT'); 
 
 Route::get('edit/product/{product_id}', [ProductController::class, 'edit_product']); 
@@ -197,3 +206,16 @@ Route::get('restore/product/{product_id}', [ProductController::class, 'restore_p
 Route::get('force_delete/product/{product_id}', [ProductController::class, 'force_delete_product'])->name('forceDelete');
 
 
+// SSLCOMMERZ Start
+Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+Route::get('/online/payment', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END

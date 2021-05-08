@@ -10,6 +10,8 @@ use App\Models\Product;
 
 use App\Models\Coupon;
 
+use App\Models\Country;
+
 use Carbon\Carbon;
 
 class CartController extends Controller
@@ -91,6 +93,7 @@ class CartController extends Controller
 
 
     function check_out(){
-        return view('checkout.index');
+        $countries = Country::select('id','name')->get();
+        return view('checkout.index',compact('countries'));
     }
 }

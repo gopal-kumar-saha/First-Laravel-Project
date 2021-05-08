@@ -9,7 +9,7 @@
         {{-- <a class="breadcrumb-item" href="index.html">Starlight</a> --}}
         <a class="breadcrumb-item" href="{{ url('home') }}">Dashboard</a>
 
-        <span class="breadcrumb-item active">Product</span>
+        <span class="breadcrumb-item active">Product</span> 
 
       </nav>
 @endsection
@@ -209,7 +209,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Category Name : </label>
-                                <select class="form-control" name="category_id">
+                                <select class="form-control" name="category_id" id="category_list">
     
                                     <option value="">-Chosse One-</option>
                                     @foreach ($categories as $category)
@@ -222,14 +222,13 @@
 
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Subcategory Name : </label>
-                                <select class="form-control" name="subcategory_id">
+                                <select class="form-control" name="subcategory_id" id="subcategory_list" >
     
                                     <option value="">-Chosse One-</option>
-                                    @foreach ($subcategories as $subcategory)
+                                    {{-- @foreach ($subcategories as $subcategory)
                                         <option value="{{  $subcategory->id }}">{{ App\Models\Category::find($subcategory->category_id)->category_name }} >{{ $subcategory->subcategory_name }}</option>
-                                    @endforeach
-                                    
-                                   
+                                    @endforeach --}}
+                            
                                 </select>
                             </div>
 
@@ -324,5 +323,29 @@
     </script>
 @endsection
 
+@endsection
+
+@section('starlight_footer_scripts')
+    <script>
+        $(document).ready(function() {
+
+            $('#category_list').change(function(){
+                var category_id = $(this).val();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type:'POST',
+                    url : 'get/subcategory/list',
+                    data : {category_id:category_id},
+                    success : function(data){
+                        $('#subcategory_list').html(data)
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
 

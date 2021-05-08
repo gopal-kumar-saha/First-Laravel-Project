@@ -22,19 +22,37 @@ use Auth;
 
 class ProductController extends Controller
 {
+
+     public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('checkrole');
+    }
+
+    
     function product(){
         $categories = Category::all();
         $products = Product::where('user_id', Auth::id())->get(); 
 
-        $subcategories = Subcategory::all();
+        $subcategories = Subcategory::all(); 
 
         $soft_deleted_products =  Product::onlyTrashed('deleted_at')->get();
+
 
         return view('product.index', compact('categories','products','soft_deleted_products','subcategories'));
     }
 
+    function get_subcategory_list(Request $request){
+        echo "Hello";
+        echo $request->category_id;
 
-
+        $subcategories = Subcategory::where('category_id', $request->category_id)->select('id','subcategory_name')->get();
+        $str_to_send = "";
+        foreach($subcategories as $subcategory){
+            $str_to_send = $str_to_send."<option value='".$subcategory->id."'> $subcategory->subcategory_name </option>";
+        }
+        echo $str_to_send;
+    }
 
 
     function product_post(Request $request){

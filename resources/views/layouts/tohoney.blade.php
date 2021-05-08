@@ -6,6 +6,10 @@
     <title>Tohoney - Home Page</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- ajax meta -->
+    <meta name="csrf-token" content="{{ csrf_token() }}"> 
+
     <link rel="shortcut icon" type="image/png" href="{{ asset('tohoney_assets') }}/images/favicon.png">
     <!-- Place favicon.ico in the root directory -->
     <!-- all css here -->
@@ -29,6 +33,8 @@
     <link rel="stylesheet" href="{{ asset('tohoney_assets/css/responsive.css') }}">
     <!-- modernizr css -->
     <script src="{{ asset('tohoney_assets/js/vendor/modernizr-2.8.3.min.js') }}"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -77,7 +83,7 @@
                         <ul class="d-flex account_login-area">
                             @auth
                                 <li>
-                                    <a href="javascript:void(0);"><i class="fa fa-user"></i> My Account <i class="fa fa-angle-down"></i></a>
+                                    <a href="javascript:void(0);"><i class="fa fa-user"></i> {{ Auth::user()->name }} <i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown_style">
                                         {{-- <li><a href="{{ route('CustomerLogin') }}">Login</a></li> --}}
                                         {{-- <li><a href="{{ route('CustomerRegister') }}">Register</a></li> --}}
@@ -422,6 +428,8 @@
     <script src="{{ asset('tohoney_assets/js/jquery-ui.min.js') }}"></script>
     <!-- main js -->
     <script src="{{ asset('tohoney_assets/js/scripts.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     @yield('footer_scripts')
 </body>
